@@ -11,7 +11,13 @@ class OptionsScheduleTableViewController: UITableViewController {
     
     let idOptionsScheduleCell = "idOptionsScheduleCell"
     let idOptionsScheduleHeader = "idOptionsScheduleHeader"
+    let headerNameArray = ["DATE AND TIME","LESSON","TEACHER","COLOR","PERIOD"]
     
+    let cellNameArray = [["Date","Time"],
+                         ["Name","Type", "Bulding", "Audience"],
+                         ["Teacher Name"],
+                         [""],
+                         ["Repeat every 7 days"]]
  
     
     override func viewDidLoad() {
@@ -22,8 +28,8 @@ class OptionsScheduleTableViewController: UITableViewController {
         tableView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.968627451, alpha: 1)
         tableView.separatorStyle = .none
         tableView.bounces = false
-        tableView.register(OptionsScheduleTableViewCell.self, forCellReuseIdentifier: idOptionsScheduleCell)
-        tableView.register(HeaderOptionScheduleTableViewCell.self, forHeaderFooterViewReuseIdentifier: idOptionsScheduleHeader)
+        tableView.register(OptionsTableViewCell.self, forCellReuseIdentifier: idOptionsScheduleCell)
+        tableView.register(HeaderOptionsTableViewCell.self, forHeaderFooterViewReuseIdentifier: idOptionsScheduleHeader)
         
         title = "Option Schedule"
     }
@@ -44,8 +50,8 @@ class OptionsScheduleTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: idOptionsScheduleCell, for: indexPath) as! OptionsScheduleTableViewCell
-        cell.cellConfigure(indexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: idOptionsScheduleCell, for: indexPath) as! OptionsTableViewCell
+        cell.cellScheduleConfigure(nameArray: cellNameArray, indexPath: indexPath)
         return cell
     }
     
@@ -54,8 +60,8 @@ class OptionsScheduleTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: idOptionsScheduleHeader) as! HeaderOptionScheduleTableViewCell
-        header.headerConfigure(section: section)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: idOptionsScheduleHeader) as! HeaderOptionsTableViewCell
+        header.headerConfigure(nameArray: headerNameArray, section: section)
         return header
     }
     
@@ -65,7 +71,7 @@ class OptionsScheduleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cell = tableView.cellForRow(at: indexPath) as! OptionsScheduleTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! OptionsTableViewCell
         
         switch indexPath {
         case [0,0]: alertDate(label: cell.nameCellLabel) { (numberWeekday, date) in

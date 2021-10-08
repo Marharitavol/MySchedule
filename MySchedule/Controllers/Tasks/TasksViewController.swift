@@ -57,7 +57,17 @@ class TasksViewController: UIViewController {
         
         showHideButton.addTarget(self, action: #selector(showHideButtonTapped), for: .touchUpInside)
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(AddButtonTapped))
+        
     }
+    
+    @objc func AddButtonTapped() {
+        
+        let tasksOptions = TaskOptionTableView()
+        navigationController?.pushViewController(tasksOptions, animated: true)
+        
+    }
+        
     @objc func showHideButtonTapped() {
         if calendar.scope == .week {
             calendar.setScope(.month, animated: true)
@@ -90,9 +100,7 @@ class TasksViewController: UIViewController {
         default:
             break
         }
-        
     }
-    
 }
 
 //MARK: UITableViewDelegate, UITableViewDataSource

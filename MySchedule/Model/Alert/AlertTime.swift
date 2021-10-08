@@ -36,7 +36,7 @@ extension UIViewController {
         
         alert.negativeWithConstraint()
         
-        alert.view.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        alert.view.heightAnchor.constraint(equalToConstant: 320).isActive = true
         datePicker.widthAnchor.constraint(equalTo: alert.view.widthAnchor).isActive = true
         datePicker.heightAnchor.constraint(equalToConstant: 160).isActive = true
         datePicker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 20).isActive = true
