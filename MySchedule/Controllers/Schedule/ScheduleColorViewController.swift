@@ -10,7 +10,7 @@ import UIKit
 class ScheduleColorViewController: UITableViewController {
     
     let idOptionsColorCell = "idOptionsColorCell"
-    let idOptionsScheduleHeader = "idOptionsColorCell"
+    let idOptionsScheduleHeader = "idOptionsScheduleHeader"
     let headerNameArray = ["Red","Orange","Yellow","Green","Blue", "Deep blue", "Purple"]
     
  
