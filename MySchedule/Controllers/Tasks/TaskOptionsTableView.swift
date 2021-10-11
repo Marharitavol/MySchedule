@@ -7,10 +7,10 @@
 
 import UIKit
 
-class TaskOptionTableView: UITableViewController {
+class TaskOptionsTableView: UITableViewController {
     
-    let idOptionsTaskCell = "idOptionsTaskCell"
-    let idOptionsTaskHeader = "idOptionsTaskHeader"
+    private let idOptionsTaskCell = "idOptionsTaskCell"
+    private let idOptionsTaskHeader = "idOptionsTaskHeader"
     let headerNameArray = ["DATE","LESSON","TASK","COLOR"]
     let cellNameArray = ["Date", "Lesson", "Task", ""]
     
@@ -66,9 +66,13 @@ class TaskOptionTableView: UITableViewController {
         case 0: alertDate(label: cell.nameCellLabel) { (numberWeekday, date) in
             print(numberWeekday, date)
         }
-        case 1: alertForCellName(label: cell.nameCellLabel, name: "Name Lesson", placeholder: "Enter name lesson")
-        case 2: alertForCellName(label: cell.nameCellLabel, name: "Name Task", placeholder: "Enter name task")
-        case 3: pushControllers(vc: ColorTaskTableViewController())
+        case 1: alertForCellName(label: cell.nameCellLabel, name: "Name Lesson", placeholder: "Enter name lesson") { text in
+            print(text)
+        }
+        case 2: alertForCellName(label: cell.nameCellLabel, name: "Name Task", placeholder: "Enter name task") { text in
+            print(text)
+        }
+        case 3: pushControllers(vc: TaskColorsTableViewController())
         default:
             print("tap OptionsTableView")
         }

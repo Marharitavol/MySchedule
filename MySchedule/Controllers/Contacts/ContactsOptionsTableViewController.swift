@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ContactOptionTableViewController: UITableViewController {
+class ContactsOptionsTableViewController: UITableViewController {
     
-    let idOptionsContactCell = "idOptionsScheduleCell"
-    let idOptionsContactHeader = "idOptionsContactHeader"
+    private let idOptionsContactCell = "idOptionsScheduleCell"
+    private let idOptionsContactHeader = "idOptionsContactHeader"
     let headerNameArray = ["Name","Phone","Mail","Type","Choose image"]
     
     let cellNameArray = ["Name", "Phone", "Mail", "Type", ""]
@@ -63,9 +63,15 @@ class ContactOptionTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! OptionsTableViewCell
         
         switch indexPath.section {
-        case 0: alertForCellName(label: cell.nameCellLabel, name: "Name Contact", placeholder: "Enter name contact")
-        case 1: alertForCellName(label: cell.nameCellLabel, name: "Phone Contact", placeholder: "Enter phone contact")
-        case 2: alertForCellName(label: cell.nameCellLabel, name: "Email Contact", placeholder: "Enter email contact")
+        case 0: alertForCellName(label: cell.nameCellLabel, name: "Name Contact", placeholder: "Enter name contact") { text in
+            print(text)
+        }
+        case 1: alertForCellName(label: cell.nameCellLabel, name: "Phone Contact", placeholder: "Enter phone contact") { text in
+            print(text)
+        }
+        case 2: alertForCellName(label: cell.nameCellLabel, name: "Email Contact", placeholder: "Enter email contact") { text in
+            print(text)
+        }
         case 3: alertFriendOrTeacher(label: cell.nameCellLabel) { (type) in
             print(type)
         }
@@ -84,7 +90,7 @@ class ContactOptionTableViewController: UITableViewController {
     }
 }
 
-extension ContactOptionTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ContactsOptionsTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(source) {

@@ -10,3 +10,7 @@ import Foundation
 protocol PressReadyTaskButtonProtocol: class {
     func readyButtonTapped(indexPath: IndexPath)
 }
+
+protocol SwitchRepeatProtocol: class {
+    func switchRepeat(value: Bool)
+}

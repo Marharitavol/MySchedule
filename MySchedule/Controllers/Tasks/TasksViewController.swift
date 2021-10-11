@@ -10,7 +10,7 @@ import FSCalendar
 
 class TasksViewController: UIViewController {
 
-    var calendarHeightConstraint: NSLayoutConstraint!
+    private var calendarHeightConstraint: NSLayoutConstraint!
     
     private var calendar: FSCalendar = {
         let calendar = FSCalendar()
@@ -18,14 +18,14 @@ class TasksViewController: UIViewController {
         return calendar
     }()
     
-    let tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.bounces = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
-    let idTasksCell = "idTasksCell"
+    private let idTasksCell = "idTasksCell"
 
     
     let showHideButton: UIButton = {
@@ -57,18 +57,18 @@ class TasksViewController: UIViewController {
         
         showHideButton.addTarget(self, action: #selector(showHideButtonTapped), for: .touchUpInside)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(AddButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         
     }
     
-    @objc func AddButtonTapped() {
+    @objc private func addButtonTapped() {
         
-        let tasksOptions = TaskOptionTableView()
+        let tasksOptions = TaskOptionsTableView()
         navigationController?.pushViewController(tasksOptions, animated: true)
         
     }
         
-    @objc func showHideButtonTapped() {
+    @objc private func showHideButtonTapped() {
         if calendar.scope == .week {
             calendar.setScope(.month, animated: true)
             showHideButton.setTitle("Close calendar", for: .normal)
