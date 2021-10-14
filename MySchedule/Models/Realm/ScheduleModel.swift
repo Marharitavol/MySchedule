@@ -16,7 +16,7 @@ class ScheduleModel: Object {
     @objc var scheduleBuilding: String = ""
     @objc var scheduleAudience: String = ""
     @objc var scheduleTeacher: String = "NAME Lastname"
-    @objc var scheduleColor: String = "FFFFF"
+    @objc var scheduleColor: String = "5787FF"
     @objc var scheduleRepeat: Bool = true
     @objc var scheduleWeekday: Int = 1
     

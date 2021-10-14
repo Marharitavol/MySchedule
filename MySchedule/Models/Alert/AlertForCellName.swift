@@ -16,7 +16,7 @@ extension UIViewController {
             
             let tfAlert = alert.textFields?.first
             guard let text = tfAlert?.text else { return }
-            label.text = text
+            label.text = (text != "" ? text : label.text)
             completionHandler(text)
         }
         

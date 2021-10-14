@@ -35,6 +35,7 @@
 		5C9F523B271057A900614C97 /* ContactsOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F523A271057A900614C97 /* ContactsOptionsTableViewController.swift */; };
 		5CA204AF27106C8900BDD11E /* AlertFriendOrTeacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA204AE27106C8900BDD11E /* AlertFriendOrTeacher.swift */; };
 		5CA204B42710856300BDD11E /* AlertPhotoCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA204B32710856300BDD11E /* AlertPhotoCamera.swift */; };
+		5CC485CA2718545E00AA6B17 /* AlertOk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC485C92718545E00AA6B17 /* AlertOk.swift */; };
 		5CC75153270D96E80001F3E1 /* PressButtonProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC75152270D96E80001F3E1 /* PressButtonProtocols.swift */; };
 		5CDF15D6270F269A00649098 /* TaskColorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDF15D5270F269A00649098 /* TaskColorsTableViewController.swift */; };
 		5CE50821270DE7BF0053C092 /* AlertDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE50820270DE7BF0053C092 /* AlertDate.swift */; };
@@ -75,6 +76,7 @@
 		5C9F523A271057A900614C97 /* ContactsOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsOptionsTableViewController.swift; sourceTree = "<group>"; };
 		5CA204AE27106C8900BDD11E /* AlertFriendOrTeacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFriendOrTeacher.swift; sourceTree = "<group>"; };
 		5CA204B32710856300BDD11E /* AlertPhotoCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPhotoCamera.swift; sourceTree = "<group>"; };
+		5CC485C92718545E00AA6B17 /* AlertOk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertOk.swift; sourceTree = "<group>"; };
 		5CC75152270D96E80001F3E1 /* PressButtonProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressButtonProtocols.swift; sourceTree = "<group>"; };
 		5CDF15D5270F269A00649098 /* TaskColorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskColorsTableViewController.swift; sourceTree = "<group>"; };
 		5CE50820270DE7BF0053C092 /* AlertDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDate.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				5CE50827270E03A20053C092 /* AlertForCellName.swift */,
 				5CA204AE27106C8900BDD11E /* AlertFriendOrTeacher.swift */,
 				5CA204B32710856300BDD11E /* AlertPhotoCamera.swift */,
+				5CC485C92718545E00AA6B17 /* AlertOk.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				5CA204B42710856300BDD11E /* AlertPhotoCamera.swift in Sources */,
 				5C9AEA97270C97E3006A2C3C /* TasksTableViewCell.swift in Sources */,
 				5C09A22D270DB150002F00BF /* OptionsTableViewCell.swift in Sources */,
+				5CC485CA2718545E00AA6B17 /* AlertOk.swift in Sources */,
 				5CC75153270D96E80001F3E1 /* PressButtonProtocols.swift in Sources */,
 				5C165F0B270F033200F50E8E /* ScheduleColorsViewController.swift in Sources */,
 				5CDF15D6270F269A00649098 /* TaskColorsTableViewController.swift in Sources */,
