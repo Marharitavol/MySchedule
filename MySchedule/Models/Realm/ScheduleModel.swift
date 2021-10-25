@@ -9,8 +9,8 @@ import RealmSwift
 
 class ScheduleModel: Object {
     
-    @objc var scheduleDate = Date()
-    @objc var scheduleTime = Date()
+    @objc var scheduleDate: Date?
+    @objc var scheduleTime: Date?
     @objc var scheduleName: String = "Unknown"
     @objc var scheduleType: String = "Unknown"
     @objc var scheduleBuilding: String = "Unknown"

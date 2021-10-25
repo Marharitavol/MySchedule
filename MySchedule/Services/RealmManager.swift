@@ -10,13 +10,19 @@ class RealmManager {
     
     static let shared = RealmManager()
     
-    private init() {    }
+    private init() {}
     
     let localRealm = try! Realm()
     
     func saveScheduleModel(model: ScheduleModel) {
         try! localRealm.write {
             localRealm.add(model)
+        }
+    }
+    
+    func deleteScheduleModel(model: ScheduleModel) {
+        try! localRealm.write {
+            localRealm.delete(model)
         }
     }
 }
