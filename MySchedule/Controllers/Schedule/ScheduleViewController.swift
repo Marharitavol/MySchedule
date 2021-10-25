@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import RealmSwift
 
 class ScheduleViewController: UIViewController {
     
@@ -19,7 +20,7 @@ class ScheduleViewController: UIViewController {
     }()
     
     private let showHideButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("Open calendar", for: .normal)
         button.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 14)
@@ -35,13 +36,18 @@ class ScheduleViewController: UIViewController {
         return tableView
     }()
     
+    let localRealm = try! Realm()
+    var scheduleArray: Results<ScheduleModel>!
+    
     private let idScheduleCell = "idScheduleCell"
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         view.backgroundColor = .white
         title = "Schedule"
+        
+        scheduleArray = localRealm.objects(ScheduleModel.self)
         
         calendar.delegate = self
         calendar.dataSource = self
@@ -53,18 +59,17 @@ class ScheduleViewController: UIViewController {
         
         setConstraints()
         swipeAction()
+        scheduleOnDay(date: Date())
         
         showHideButton.addTarget(self, action: #selector(showHideButtonTapped), for: .touchUpInside)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
-        
     }
     
     @objc private func addButtonTapped() {
         
         let scheduleOptions = ScheduleOptionsTableViewController()
         navigationController?.pushViewController(scheduleOptions, animated: true)
-        
     }
     
     @objc private func showHideButtonTapped() {
@@ -72,10 +77,9 @@ class ScheduleViewController: UIViewController {
             calendar.setScope(.month, animated: true)
             showHideButton.setTitle("Close calendar", for: .normal)
         } else {
-                calendar.setScope(.week, animated: true)
-                showHideButton.setTitle("Open calendar", for: .normal)
+            calendar.setScope(.week, animated: true)
+            showHideButton.setTitle("Open calendar", for: .normal)
         }
-        
     }
     
     //MARK: SwipeGestureRecognizer
@@ -89,6 +93,7 @@ class ScheduleViewController: UIViewController {
         swipeDown.direction = .down
         calendar.addGestureRecognizer(swipeDown)
     }
+    
     @objc func handleSwipe(gesture: UISwipeGestureRecognizer) {
         
         switch gesture.direction {
@@ -99,28 +104,41 @@ class ScheduleViewController: UIViewController {
         default:
             break
         }
-        
     }
     
+    private func scheduleOnDay(date: Date) {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.weekday], from: date)
+        guard let weekday = components.weekday else { return }
+        
+        let dateStart = date
+        let dateEnd: Date = {
+            let components = DateComponents(day: 1, second: -1)
+            return Calendar.current.date(byAdding: components, to: dateStart)!
+        }()
+        
+        let predicateRepeat = NSPredicate(format: "scheduleWeekday = \(weekday) AND scheduleRepeat = true")
+        let predicateUnrepeat = NSPredicate(format: "scheduleRepeat = false AND scheduleDate BETWEEN %@", [dateStart, dateEnd])
+        let compound = NSCompoundPredicate(type: .or, subpredicates: [predicateRepeat, predicateUnrepeat])
+        
+        scheduleArray = localRealm.objects(ScheduleModel.self).filter(compound).sorted(byKeyPath: "scheduleTime")
+        tableView.reloadData()
+    }
 }
 
 //MARK: UITableViewDelegate, UITableViewDataSource
 
 extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return scheduleArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idScheduleCell, for: indexPath) as! ScheduleTableViewCell
-        switch indexPath.row {
-        case 0: cell.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
-        case 1: cell.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
-        default:
-            cell.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
-        }
-    return cell
- }
+        let model = scheduleArray[indexPath.row]
+        cell.configure(model: model)
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
@@ -137,7 +155,7 @@ extension ScheduleViewController: FSCalendarDataSource, FSCalendarDelegate {
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print(date)
+        scheduleOnDay(date: date)
     }
 }
 
@@ -177,7 +195,6 @@ extension ScheduleViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
             
         ])
-        
     }
 }
 
